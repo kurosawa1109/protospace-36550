@@ -1,7 +1,7 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_protopace, except: [:index,:new,:create]
-  before_action :move_to_index, only: [:shoe, :update]
+  before_action :move_to_index, only: [:show, :update]
 
   
   def index
@@ -49,7 +49,6 @@ class PrototypesController < ApplicationController
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
 
-  # ここで@prototypeを定義してshow、edit、update、destroyに対しbefore_actionで読み込んでいる。
   def set_protopace
     @prototype = Prototype.find(params[:id])
   end
